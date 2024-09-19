@@ -1,6 +1,6 @@
 # Bookshelf App
 
-## Author: [Your Name]
+## Author: Ryan
 
 ## Date: [Today's Date]
 
