@@ -61,64 +61,12 @@ function renderBooks() {
 }
 
 // Menangani klik pada span untuk toggle checkbox
-// const checkbox = document.getElementById("bookFormIsComplete");
-// const customCheckbox = document.querySelector(".custom-checkbox");
+const checkbox = document.getElementById("bookFormIsComplete");
+const customCheckbox = document.querySelector(".custom-checkbox");
 
-// // Tambahkan event listener pada custom checkbox
-// customCheckbox.addEventListener("click", () => {
-//   checkbox.checked = !checkbox.checked; // Toggle status checkbox
-//   customCheckbox.classList.toggle("checked", checkbox.checked); // Update tampilan
-// });
-
-// document.addEventListener("DOMContentLoaded", () => {
-//   const checkbox = document.getElementById("bookFormIsComplete");
-//   const customCheckbox = document.querySelector(".custom-checkbox");
-
-//   customCheckbox.addEventListener("click", () => {
-//     checkbox.checked = !checkbox.checked; // Toggle status checkbox
-//     customCheckbox.classList.toggle("checked", checkbox.checked); // Update tampilan
-//   });
-
-//   // Tambahkan event listener untuk mengubah tampilan saat checkbox diklik
-//   checkbox.addEventListener("change", () => {
-//     customCheckbox.classList.toggle("checked", checkbox.checked);
-//   });
-// });
-
-// const checkbox = document.getElementById("bookFormIsComplete");
-// const customCheckbox = document.querySelector(".custom-checkbox");
-
-// // Tambahkan event listener pada custom checkbox
-// customCheckbox.addEventListener("click", () => {
-//   checkbox.checked = !checkbox.checked; // Toggle status checkbox
-//   customCheckbox.classList.toggle("checked", checkbox.checked); // Update tampilan
-// });
-
-// // Pastikan label juga berfungsi untuk mengklik
-// document
-//   .querySelector('label[for="bookFormIsComplete"]')
-//   .addEventListener("click", () => {
-//     checkbox.checked = !checkbox.checked; // Toggle status checkbox
-//     customCheckbox.classList.toggle("checked", checkbox.checked); // Update tampilan
-//   });
-
-document.addEventListener("DOMContentLoaded", () => {
-  const checkbox = document.getElementById("bookFormIsComplete");
-  const customCheckbox = document.querySelector(".custom-checkbox");
-
-  // Fungsi untuk toggle checkbox
-  function toggleCheckbox() {
-    checkbox.checked = !checkbox.checked; // Toggle status checkbox
-    customCheckbox.classList.toggle("checked", checkbox.checked); // Update tampilan
-  }
-
-  // Menghubungkan click event ke checkbox asli
-  checkbox.addEventListener("click", () => {
-    customCheckbox.classList.toggle("checked", checkbox.checked); // Update tampilan
-  });
-
-  // Menambahkan event listener untuk custom checkbox
-  customCheckbox.addEventListener("click", toggleCheckbox);
+customCheckbox.addEventListener("click", () => {
+  checkbox.checked = !checkbox.checked; // Toggle status checkbox
+  customCheckbox.classList.toggle("checked", checkbox.checked); // Update tampilan
 });
 
 // Membuat elemen buku
@@ -214,41 +162,44 @@ function resetFormToAddBookMode() {
 }
 
 // Fungsi Edit Buku
-function editBook(bookId) {
-  const book = findBook(bookId);
-  if (!book) return;
+// function editBook(bookId) {
+//   const book = findBook(bookId);
+//   if (!book) return;
 
-  // Mengisi form dengan data buku yang akan diedit
-  document.getElementById("bookFormTitle").value = book.title;
-  document.getElementById("bookFormAuthor").value = book.author;
-  document.getElementById("bookFormYear").value = book.year;
-  document.getElementById("bookFormIsComplete").checked = book.isComplete;
+//   // Mengisi form dengan data buku yang akan diedit
+//   document.getElementById("bookFormTitle").value = book.title;
+//   document.getElementById("bookFormAuthor").value = book.author;
+//   document.getElementById("bookFormYear").value = book.year;
+//   document.getElementById("bookFormIsComplete").checked = book.isComplete;
 
-  const submitButton = document.querySelector("#bookForm button");
-  submitButton.innerText = "Update Buku";
+//   const submitButton = document.querySelector("#bookForm button");
+//   submitButton.innerText = "Update Buku";
 
-  // Hapus event listener lama
-  const oldForm = document.getElementById("bookForm");
-  const newForm = oldForm.cloneNode(true);
-  oldForm.parentNode.replaceChild(newForm, oldForm);
+//   // Menangkap form
+//   const form = document.getElementById("bookForm");
 
-  // Event listener baru untuk update buku
-  newForm.addEventListener("submit", function (event) {
-    event.preventDefault();
+//   // Hapus event listener lama
+//   const newForm = form.cloneNode(true);
+//   form.parentNode.replaceChild(newForm, form);
 
-    book.title = document.getElementById("bookFormTitle").value;
-    book.author = document.getElementById("bookFormAuthor").value;
-    book.year = document.getElementById("bookFormYear").value;
-    book.isComplete = document.getElementById("bookFormIsComplete").checked;
+//   // Event listener baru untuk update buku
+//   newForm.addEventListener("submit", function (event) {
+//     event.preventDefault();
 
-    saveData();
-    renderBooks();
+//     // Update data buku
+//     book.title = newForm.querySelector("#bookFormTitle").value;
+//     book.author = newForm.querySelector("#bookFormAuthor").value;
+//     book.year = newForm.querySelector("#bookFormYear").value;
+//     book.isComplete = newForm.querySelector("#bookFormIsComplete").checked;
 
-    // Reset form dan kembalikan submit button ke kondisi awal
-    newForm.reset();
-    resetFormToAddBookMode(); // Ubah form kembali ke mode 'Tambah Buku'
-  });
-}
+//     saveData();
+//     renderBooks();
+
+//     // Reset form dan kembalikan submit button ke kondisi awal
+//     newForm.reset();
+//     resetFormToAddBookMode(); // Ubah form kembali ke mode 'Tambah Buku'
+//   });
+// }
 
 // Tandai buku sebagai selesai dibaca
 function completeBook(bookId) {
@@ -322,51 +273,6 @@ searchForm.addEventListener("submit", function (event) {
 
   renderSearchResults(filteredBooks);
 });
-
-function validateForm(title, author, year) {
-  if (title === "" || author === "" || year === "") {
-    alert("Semua field harus diisi!");
-    return false;
-  }
-  return true;
-}
-
-// Tambah buku melalui form dengan validasi
-bookForm.addEventListener("submit", function (event) {
-  event.preventDefault();
-
-  const title = document.getElementById("bookFormTitle").value;
-  const author = document.getElementById("bookFormAuthor").value;
-  const year = document.getElementById("bookFormYear").value;
-
-  if (!validateForm(title, author, year)) {
-    return;
-  }
-
-  const isComplete = document.getElementById("bookFormIsComplete").checked;
-  addBook(title, author, year, isComplete);
-
-  alert("Buku berhasil ditambahkan!");
-  bookForm.reset();
-});
-
-function addSubmitListenerToAddBook() {
-  const submitButton = document.querySelector("#bookForm button");
-  const form = document.getElementById("bookForm");
-
-  form.addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    const title = document.getElementById("bookFormTitle").value;
-    const author = document.getElementById("bookFormAuthor").value;
-    const year = document.getElementById("bookFormYear").value;
-    const isComplete = document.getElementById("bookFormIsComplete").checked;
-
-    addBook(title, author, year, isComplete);
-    form.reset();
-    submitButton.innerText = "Tambah Buku"; // Memastikan teks tombol kembali ke default
-  });
-}
 
 // Menampilkan hasil pencarian
 function renderSearchResults(filteredBooks) {
