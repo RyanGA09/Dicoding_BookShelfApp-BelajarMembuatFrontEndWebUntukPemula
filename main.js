@@ -70,17 +70,71 @@ customCheckbox.addEventListener("click", () => {
 });
 
 // Membuat elemen buku
+// function makeBookElement({ id, title, author, year, isComplete }) {
+//   const bookTitle = document.createElement("h3");
+//   bookTitle.innerText = title;
+//   const bookAuthor = document.createElement("p");
+//   bookAuthor.innerText = `Penulis: ${author}`;
+//   const bookYear = document.createElement("p");
+//   bookYear.innerText = `Tahun: ${year}`;
+
+//   const bookItem = document.createElement("div");
+//   bookItem.classList.add("book-item");
+//   bookItem.setAttribute("data-bookid", id);
+//   bookItem.append(bookTitle, bookAuthor, bookYear);
+
+//   const bookActions = document.createElement("div");
+//   bookActions.classList.add("book-actions");
+
+//   const deleteButton = document.createElement("button");
+//   deleteButton.classList.add("delete-button");
+//   deleteButton.innerText = "Hapus Buku";
+//   deleteButton.addEventListener("click", function () {
+//     deleteBook(id);
+//   });
+
+//   if (isComplete) {
+//     const undoButton = document.createElement("button");
+//     undoButton.classList.add("unfinish-button");
+//     undoButton.innerText = "Belum Selesai";
+//     undoButton.addEventListener("click", function () {
+//       undoBookCompletion(id);
+//     });
+//     bookActions.append(undoButton);
+//   } else {
+//     const finishButton = document.createElement("button");
+//     finishButton.classList.add("finish-button");
+//     finishButton.innerText = "Selesai dibaca";
+//     finishButton.addEventListener("click", function () {
+//       completeBook(id);
+//     });
+//     bookActions.append(finishButton);
+//   }
+
+//   bookActions.append(deleteButton);
+//   bookItem.append(bookActions);
+
+//   return bookItem;
+// }
+
+// Membuat elemen buku
 function makeBookElement({ id, title, author, year, isComplete }) {
   const bookTitle = document.createElement("h3");
   bookTitle.innerText = title;
+  bookTitle.setAttribute("data-testid", "bookItemTitle"); // Tambahkan data-testid
+
   const bookAuthor = document.createElement("p");
   bookAuthor.innerText = `Penulis: ${author}`;
+  bookAuthor.setAttribute("data-testid", "bookItemAuthor"); // Tambahkan data-testid
+
   const bookYear = document.createElement("p");
   bookYear.innerText = `Tahun: ${year}`;
+  bookYear.setAttribute("data-testid", "bookItemYear"); // Tambahkan data-testid
 
   const bookItem = document.createElement("div");
   bookItem.classList.add("book-item");
   bookItem.setAttribute("data-bookid", id);
+  bookItem.setAttribute("data-testid", "bookItem"); // Tambahkan data-testid
   bookItem.append(bookTitle, bookAuthor, bookYear);
 
   const bookActions = document.createElement("div");
@@ -89,14 +143,23 @@ function makeBookElement({ id, title, author, year, isComplete }) {
   const deleteButton = document.createElement("button");
   deleteButton.classList.add("delete-button");
   deleteButton.innerText = "Hapus Buku";
+  deleteButton.setAttribute("data-testid", "bookItemDeleteButton"); // Tambahkan data-testid
   deleteButton.addEventListener("click", function () {
     deleteBook(id);
+  });
+
+  const editButton = document.createElement("button");
+  editButton.classList.add("edit-button");
+  editButton.innerText = "Edit Buku";
+  editButton.addEventListener("click", function () {
+    editBook(id);
   });
 
   if (isComplete) {
     const undoButton = document.createElement("button");
     undoButton.classList.add("unfinish-button");
     undoButton.innerText = "Belum Selesai";
+    deleteButton.setAttribute("data-testid", "bookItemDeleteButton"); // Tambahkan data-testid
     undoButton.addEventListener("click", function () {
       undoBookCompletion(id);
     });
@@ -105,16 +168,82 @@ function makeBookElement({ id, title, author, year, isComplete }) {
     const finishButton = document.createElement("button");
     finishButton.classList.add("finish-button");
     finishButton.innerText = "Selesai dibaca";
+    finishButton.setAttribute("data-testid", "bookItemIsCompleteButton"); // Tambahkan data-testid
     finishButton.addEventListener("click", function () {
       completeBook(id);
     });
     bookActions.append(finishButton);
   }
 
-  bookActions.append(deleteButton);
+  bookActions.append(editButton, deleteButton);
   bookItem.append(bookActions);
 
   return bookItem;
+}
+
+// Fungsi untuk mengatur ulang form ke mode 'Tambah Buku'
+function resetFormToAddBookMode() {
+  const submitButton = document.querySelector("#bookForm button");
+  submitButton.innerText = "Tambah Buku";
+
+  // Tambah event listener untuk menambah buku
+  const form = document.getElementById("bookForm");
+
+  // Pastikan untuk menghapus semua event listener lama sebelum menambahkan event listener baru
+  const newForm = form.cloneNode(true);
+  form.parentNode.replaceChild(newForm, form);
+
+  newForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const title = document.getElementById("bookFormTitle").value;
+    const author = document.getElementById("bookFormAuthor").value;
+    const year = document.getElementById("bookFormYear").value;
+    const isComplete = document.getElementById("bookFormIsComplete").checked;
+
+    addBook(title, author, year, isComplete);
+
+    alert("Buku berhasil ditambahkan!");
+    newForm.reset();
+    submitButton.innerText = "Tambah Buku"; // Pastikan kembali ke mode 'Tambah Buku'
+  });
+}
+
+// Fungsi Edit Buku
+function editBook(bookId) {
+  const book = findBook(bookId);
+  if (!book) return;
+
+  // Mengisi form dengan data buku yang akan diedit
+  document.getElementById("bookFormTitle").value = book.title;
+  document.getElementById("bookFormAuthor").value = book.author;
+  document.getElementById("bookFormYear").value = book.year;
+  document.getElementById("bookFormIsComplete").checked = book.isComplete;
+
+  const submitButton = document.querySelector("#bookForm button");
+  submitButton.innerText = "Update Buku";
+
+  // Hapus event listener lama
+  const oldForm = document.getElementById("bookForm");
+  const newForm = oldForm.cloneNode(true);
+  oldForm.parentNode.replaceChild(newForm, oldForm);
+
+  // Event listener baru untuk update buku
+  newForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    book.title = document.getElementById("bookFormTitle").value;
+    book.author = document.getElementById("bookFormAuthor").value;
+    book.year = document.getElementById("bookFormYear").value;
+    book.isComplete = document.getElementById("bookFormIsComplete").checked;
+
+    saveData();
+    renderBooks();
+
+    // Reset form dan kembalikan submit button ke kondisi awal
+    newForm.reset();
+    resetFormToAddBookMode(); // Ubah form kembali ke mode 'Tambah Buku'
+  });
 }
 
 // Tandai buku sebagai selesai dibaca
@@ -190,6 +319,51 @@ searchForm.addEventListener("submit", function (event) {
   renderSearchResults(filteredBooks);
 });
 
+function validateForm(title, author, year) {
+  if (title === "" || author === "" || year === "") {
+    alert("Semua field harus diisi!");
+    return false;
+  }
+  return true;
+}
+
+// Tambah buku melalui form dengan validasi
+bookForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const title = document.getElementById("bookFormTitle").value;
+  const author = document.getElementById("bookFormAuthor").value;
+  const year = document.getElementById("bookFormYear").value;
+
+  if (!validateForm(title, author, year)) {
+    return;
+  }
+
+  const isComplete = document.getElementById("bookFormIsComplete").checked;
+  addBook(title, author, year, isComplete);
+
+  alert("Buku berhasil ditambahkan!");
+  bookForm.reset();
+});
+
+function addSubmitListenerToAddBook() {
+  const submitButton = document.querySelector("#bookForm button");
+  const form = document.getElementById("bookForm");
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const title = document.getElementById("bookFormTitle").value;
+    const author = document.getElementById("bookFormAuthor").value;
+    const year = document.getElementById("bookFormYear").value;
+    const isComplete = document.getElementById("bookFormIsComplete").checked;
+
+    addBook(title, author, year, isComplete);
+    form.reset();
+    submitButton.innerText = "Tambah Buku"; // Memastikan teks tombol kembali ke default
+  });
+}
+
 // Menampilkan hasil pencarian
 function renderSearchResults(filteredBooks) {
   const incompleteBookList = document.getElementById("incompleteBookList");
@@ -208,10 +382,21 @@ function renderSearchResults(filteredBooks) {
   }
 }
 
+// Inisialisasi
+// window.addEventListener("DOMContentLoaded", function () {
+//   if (isStorageExist()) {
+//     loadDataFromStorage();
+//     renderBooks();
+//     addSubmitListenerToAddBook(); // Menambahkan listener default saat load
+//   }
+// });
+
 // Muat data saat halaman di-refresh
 window.addEventListener("DOMContentLoaded", function () {
   if (isStorageExist()) {
     loadDataFromStorage();
     renderBooks();
+    addSubmitListenerToAddBook(); // Menambahkan listener default saat load
+    resetFormToAddBookMode(); // Pastikan form diatur ke mode 'Tambah Buku' saat awal load
   }
 });
