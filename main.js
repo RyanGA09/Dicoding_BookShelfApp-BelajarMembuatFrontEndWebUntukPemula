@@ -70,54 +70,6 @@ customCheckbox.addEventListener("click", () => {
 });
 
 // Membuat elemen buku
-// function makeBookElement({ id, title, author, year, isComplete }) {
-//   const bookTitle = document.createElement("h3");
-//   bookTitle.innerText = title;
-//   const bookAuthor = document.createElement("p");
-//   bookAuthor.innerText = `Penulis: ${author}`;
-//   const bookYear = document.createElement("p");
-//   bookYear.innerText = `Tahun: ${year}`;
-
-//   const bookItem = document.createElement("div");
-//   bookItem.classList.add("book-item");
-//   bookItem.setAttribute("data-bookid", id);
-//   bookItem.append(bookTitle, bookAuthor, bookYear);
-
-//   const bookActions = document.createElement("div");
-//   bookActions.classList.add("book-actions");
-
-//   const deleteButton = document.createElement("button");
-//   deleteButton.classList.add("delete-button");
-//   deleteButton.innerText = "Hapus Buku";
-//   deleteButton.addEventListener("click", function () {
-//     deleteBook(id);
-//   });
-
-//   if (isComplete) {
-//     const undoButton = document.createElement("button");
-//     undoButton.classList.add("unfinish-button");
-//     undoButton.innerText = "Belum Selesai";
-//     undoButton.addEventListener("click", function () {
-//       undoBookCompletion(id);
-//     });
-//     bookActions.append(undoButton);
-//   } else {
-//     const finishButton = document.createElement("button");
-//     finishButton.classList.add("finish-button");
-//     finishButton.innerText = "Selesai dibaca";
-//     finishButton.addEventListener("click", function () {
-//       completeBook(id);
-//     });
-//     bookActions.append(finishButton);
-//   }
-
-//   bookActions.append(deleteButton);
-//   bookItem.append(bookActions);
-
-//   return bookItem;
-// }
-
-// Membuat elemen buku
 function makeBookElement({ id, title, author, year, isComplete }) {
   const bookTitle = document.createElement("h3");
   bookTitle.innerText = title;
@@ -381,15 +333,6 @@ function renderSearchResults(filteredBooks) {
     }
   }
 }
-
-// Inisialisasi
-// window.addEventListener("DOMContentLoaded", function () {
-//   if (isStorageExist()) {
-//     loadDataFromStorage();
-//     renderBooks();
-//     addSubmitListenerToAddBook(); // Menambahkan listener default saat load
-//   }
-// });
 
 // Muat data saat halaman di-refresh
 window.addEventListener("DOMContentLoaded", function () {
