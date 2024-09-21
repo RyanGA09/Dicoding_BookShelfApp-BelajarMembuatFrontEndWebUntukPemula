@@ -61,12 +61,64 @@ function renderBooks() {
 }
 
 // Menangani klik pada span untuk toggle checkbox
-const checkbox = document.getElementById("bookFormIsComplete");
-const customCheckbox = document.querySelector(".custom-checkbox");
+// const checkbox = document.getElementById("bookFormIsComplete");
+// const customCheckbox = document.querySelector(".custom-checkbox");
 
-customCheckbox.addEventListener("click", () => {
-  checkbox.checked = !checkbox.checked; // Toggle status checkbox
-  customCheckbox.classList.toggle("checked", checkbox.checked); // Update tampilan
+// // Tambahkan event listener pada custom checkbox
+// customCheckbox.addEventListener("click", () => {
+//   checkbox.checked = !checkbox.checked; // Toggle status checkbox
+//   customCheckbox.classList.toggle("checked", checkbox.checked); // Update tampilan
+// });
+
+// document.addEventListener("DOMContentLoaded", () => {
+//   const checkbox = document.getElementById("bookFormIsComplete");
+//   const customCheckbox = document.querySelector(".custom-checkbox");
+
+//   customCheckbox.addEventListener("click", () => {
+//     checkbox.checked = !checkbox.checked; // Toggle status checkbox
+//     customCheckbox.classList.toggle("checked", checkbox.checked); // Update tampilan
+//   });
+
+//   // Tambahkan event listener untuk mengubah tampilan saat checkbox diklik
+//   checkbox.addEventListener("change", () => {
+//     customCheckbox.classList.toggle("checked", checkbox.checked);
+//   });
+// });
+
+// const checkbox = document.getElementById("bookFormIsComplete");
+// const customCheckbox = document.querySelector(".custom-checkbox");
+
+// // Tambahkan event listener pada custom checkbox
+// customCheckbox.addEventListener("click", () => {
+//   checkbox.checked = !checkbox.checked; // Toggle status checkbox
+//   customCheckbox.classList.toggle("checked", checkbox.checked); // Update tampilan
+// });
+
+// // Pastikan label juga berfungsi untuk mengklik
+// document
+//   .querySelector('label[for="bookFormIsComplete"]')
+//   .addEventListener("click", () => {
+//     checkbox.checked = !checkbox.checked; // Toggle status checkbox
+//     customCheckbox.classList.toggle("checked", checkbox.checked); // Update tampilan
+//   });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const checkbox = document.getElementById("bookFormIsComplete");
+  const customCheckbox = document.querySelector(".custom-checkbox");
+
+  // Fungsi untuk toggle checkbox
+  function toggleCheckbox() {
+    checkbox.checked = !checkbox.checked; // Toggle status checkbox
+    customCheckbox.classList.toggle("checked", checkbox.checked); // Update tampilan
+  }
+
+  // Menghubungkan click event ke checkbox asli
+  checkbox.addEventListener("click", () => {
+    customCheckbox.classList.toggle("checked", checkbox.checked); // Update tampilan
+  });
+
+  // Menambahkan event listener untuk custom checkbox
+  customCheckbox.addEventListener("click", toggleCheckbox);
 });
 
 // Membuat elemen buku
