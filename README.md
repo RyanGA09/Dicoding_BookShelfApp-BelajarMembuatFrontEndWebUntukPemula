@@ -1,7 +1,7 @@
 # Bookshelf App
 
-## Author: Ryan
+## Author: Ryan Gading Abdullah
 
-## Date: [Today's Date]
+## Date: September 2024
 
 ## Description: A simple bookshelf app that allows users to add, remove, and list books.

@@ -17,7 +17,9 @@
         <h2>Tambah Buku Baru</h2>
         <form id="bookForm" data-testid="bookForm">
           <div class="form-group">
-            <label for="bookFormTitle">Judul</label>
+            <div class="input-label">
+              <label for="bookFormTitle">Judul</label>
+            </div>
             <input
               id="bookFormTitle"
               type="text"
@@ -27,7 +29,9 @@
             />
           </div>
           <div class="form-group">
-            <label for="bookFormAuthor">Penulis</label>
+            <div class="input-label">
+              <label for="bookFormAuthor">Penulis</label>
+            </div>
             <input
               id="bookFormAuthor"
               type="text"
@@ -37,7 +41,9 @@
             />
           </div>
           <div class="form-group">
-            <label for="bookFormYear">Tahun</label>
+            <div class="input-label">
+              <label for="bookFormYear">Tahun</label>
+            </div>
             <input
               id="bookFormYear"
               type="number"
@@ -47,20 +53,28 @@
             />
           </div>
           <div class="form-group">
-            <label for="bookFormIsComplete">Selesai dibaca</label>
-            <input
-              id="bookFormIsComplete"
-              type="checkbox"
-              data-testid="bookFormIsCompleteCheckbox"
-            />
+            <div class="input-label">
+              <label for="bookFormIsComplete" style="margin-right: 10px"
+                >Selesai dibaca</label
+              >
+              <input
+                id="bookFormIsComplete"
+                type="checkbox"
+                data-testid="bookFormIsCompleteCheckbox"
+              />
+              <span class="custom-checkbox"></span>
+            </div>
           </div>
-          <button
-            id="bookFormSubmit"
-            type="submit"
-            data-testid="bookFormSubmitButton"
-          >
-            Masukkan Buku ke rak
-          </button>
+          <div class="book-actions">
+            <button
+              class="submit-button"
+              id="bookFormSubmit"
+              type="submit"
+              data-testid="bookFormSubmitButton"
+            >
+              Masukkan Buku ke rak
+            </button>
+          </div>
         </form>
       </section>
 
@@ -68,7 +82,9 @@
         <h2>Cari Buku</h2>
         <form id="searchBook" data-testid="searchBookForm">
           <div class="form-group">
-            <label for="searchBookTitle">Judul</label>
+            <div class="input-label">
+              <label for="searchBookTitle">Judul</label>
+            </div>
             <input
               id="searchBookTitle"
               type="text"
@@ -76,50 +92,52 @@
               placeholder="Cari buku berdasarkan judul"
             />
           </div>
-          <button
-            id="searchSubmit"
-            type="submit"
-            data-testid="searchBookFormSubmitButton"
-          >
-            Cari
-          </button>
+          <div class="book-actions">
+            <button
+              class="submit-button"
+              id="searchSubmit"
+              type="submit"
+              data-testid="searchBookFormSubmitButton"
+            >
+              Cari
+            </button>
+          </div>
         </form>
       </section>
 
       <section>
         <h2>Belum selesai dibaca</h2>
-
         <div id="incompleteBookList" data-testid="incompleteBookList">
           <div class="book-item" data-bookid="123123123" data-testid="bookItem">
-            <h3 class="book-title" data-testid="bookItemTitle">Judul Buku 1</h3>
-            <p class="book-author" data-testid="bookItemAuthor">
-              Penulis: Penulis Buku 1
-            </p>
-            <p class="book-year" data-testid="bookItemYear">Tahun: 2030</p>
-            <div class="book-actions">
-              <button data-testid="bookItemIsCompleteButton">
+            <!-- <h3 class="book-title" data-testid="bookItemTitle"></h3>
+            <p class="book-author" data-testid="bookItemAuthor"></p>
+            <p class="book-year" data-testid="bookItemYear"></p> -->
+            <!-- <div class="book-actions">
+              <button
+                class="finish-button"
+                data-testid="bookItemIsCompleteButton"
+              >
                 Selesai dibaca
               </button>
               <button class="delete-button" data-testid="bookItemDeleteButton">
                 Hapus Buku
               </button>
-              <button data-testid="bookItemEditButton">Edit Buku</button>
-            </div>
+              <button class="finish-button" data-testid="bookItemEditButton">
+                Edit Buku
+              </button>
+            </div> -->
           </div>
         </div>
       </section>
 
       <section>
         <h2>Selesai dibaca</h2>
-
         <div id="completeBookList" data-testid="completeBookList">
           <div class="book-item" data-bookid="456456456" data-testid="bookItem">
-            <h3 class="book-title" data-testid="bookItemTitle">Judul Buku 2</h3>
-            <p class="book-author" data-testid="bookItemAuthor">
-              Penulis: Penulis Buku 2
-            </p>
-            <p class="book-year" data-testid="bookItemYear">Tahun: 2030</p>
-            <div class="book-actions">
+            <!-- <h3 class="book-title" data-testid="bookItemTitle"></h3>
+            <p class="book-author" data-testid="bookItemAuthor"></p>
+            <p class="book-year" data-testid="bookItemYear"></p> -->
+            <!-- <div class="book-actions">
               <button data-testid="bookItemIsCompleteButton">
                 Selesai dibaca
               </button>
@@ -127,7 +145,7 @@
                 Hapus Buku
               </button>
               <button data-testid="bookItemEditButton">Edit Buku</button>
-            </div>
+            </div> -->
           </div>
         </div>
       </section>
