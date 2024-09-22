@@ -166,6 +166,7 @@ function editBook(bookId) {
     saveData();
     renderBooks();
 
+    alert("Buku berhasil diperbarui!");
     // Reset form dan kembalikan submit button ke kondisi awal
     newForm.reset();
     resetFormToAddBookMode(); // Ubah form kembali ke mode 'Tambah Buku'
