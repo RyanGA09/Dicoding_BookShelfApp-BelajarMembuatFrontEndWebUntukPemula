@@ -13,4 +13,5 @@ A simple bookshelf app that allows users to add, remove, search, and list books.
 ## LICENSE
 
 [MIT LICENSE](LICENSE)
+
 &copy; 2024 Ryan Gading Abdullah. All rights reserved.
