@@ -94,6 +94,8 @@ input[type="checkbox"] {
 input[type="checkbox"]:checked + .custom-checkbox {
   background-color: #409efd; /* Warna latar belakang */
   border: 2px solid #409efd; /* Warna border */
+  position: relative;
+  z-index: 1; /* Pastikan checkbox ada di atas elemen lain */
 }
 
 /* Gaya untuk tanda centang */

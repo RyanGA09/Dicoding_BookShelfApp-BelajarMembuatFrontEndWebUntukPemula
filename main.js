@@ -136,7 +136,7 @@ function makeBookElement({ id, title, author, year, isComplete }) {
 // Fungsi untuk mengatur ulang form ke mode 'Tambah Buku'
 function resetFormToAddBookMode() {
   const submitButton = document.querySelector("#bookForm button");
-  submitButton.innerText = "Tambah Buku";
+  submitButton.innerText = "Tambah Buku ke rak";
 
   // Tambah event listener untuk menambah buku
   const form = document.getElementById("bookForm");
@@ -162,44 +162,44 @@ function resetFormToAddBookMode() {
 }
 
 // Fungsi Edit Buku
-// function editBook(bookId) {
-//   const book = findBook(bookId);
-//   if (!book) return;
+function editBook(bookId) {
+  const book = findBook(bookId);
+  if (!book) return;
 
-//   // Mengisi form dengan data buku yang akan diedit
-//   document.getElementById("bookFormTitle").value = book.title;
-//   document.getElementById("bookFormAuthor").value = book.author;
-//   document.getElementById("bookFormYear").value = book.year;
-//   document.getElementById("bookFormIsComplete").checked = book.isComplete;
+  // Mengisi form dengan data buku yang akan diedit
+  document.getElementById("bookFormTitle").value = book.title;
+  document.getElementById("bookFormAuthor").value = book.author;
+  document.getElementById("bookFormYear").value = book.year;
+  document.getElementById("bookFormIsComplete").checked = book.isComplete;
 
-//   const submitButton = document.querySelector("#bookForm button");
-//   submitButton.innerText = "Update Buku";
+  const submitButton = document.querySelector("#bookForm button");
+  submitButton.innerText = "Update Buku";
 
-//   // Menangkap form
-//   const form = document.getElementById("bookForm");
+  // Menangkap form
+  const form = document.getElementById("bookForm");
 
-//   // Hapus event listener lama
-//   const newForm = form.cloneNode(true);
-//   form.parentNode.replaceChild(newForm, form);
+  // Hapus event listener lama
+  const newForm = form.cloneNode(true);
+  form.parentNode.replaceChild(newForm, form);
 
-//   // Event listener baru untuk update buku
-//   newForm.addEventListener("submit", function (event) {
-//     event.preventDefault();
+  // Event listener baru untuk update buku
+  newForm.addEventListener("submit", function (event) {
+    event.preventDefault();
 
-//     // Update data buku
-//     book.title = newForm.querySelector("#bookFormTitle").value;
-//     book.author = newForm.querySelector("#bookFormAuthor").value;
-//     book.year = newForm.querySelector("#bookFormYear").value;
-//     book.isComplete = newForm.querySelector("#bookFormIsComplete").checked;
+    // Update data buku
+    book.title = newForm.querySelector("#bookFormTitle").value;
+    book.author = newForm.querySelector("#bookFormAuthor").value;
+    book.year = newForm.querySelector("#bookFormYear").value;
+    book.isComplete = newForm.querySelector("#bookFormIsComplete").checked;
 
-//     saveData();
-//     renderBooks();
+    saveData();
+    renderBooks();
 
-//     // Reset form dan kembalikan submit button ke kondisi awal
-//     newForm.reset();
-//     resetFormToAddBookMode(); // Ubah form kembali ke mode 'Tambah Buku'
-//   });
-// }
+    // Reset form dan kembalikan submit button ke kondisi awal
+    newForm.reset();
+    resetFormToAddBookMode(); // Ubah form kembali ke mode 'Tambah Buku'
+  });
+}
 
 // Tandai buku sebagai selesai dibaca
 function completeBook(bookId) {
