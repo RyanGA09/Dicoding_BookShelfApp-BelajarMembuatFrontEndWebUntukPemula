@@ -1,3 +1,7 @@
+// Flag untuk menentukan apakah sedang dalam mode edit
+let isEditing = false;
+let editingBookId = null; // Menyimpan ID buku yang sedang di-edit
+
 // Tambahkan buku baru
 function addBook(title, author, year, isComplete) {
   const book = {
@@ -115,7 +119,31 @@ bookForm.addEventListener("submit", function (event) {
   const year = document.getElementById("bookFormYear").value;
   const isComplete = document.getElementById("bookFormIsComplete").checked;
 
-  addBook(title, author, year, isComplete);
+  if (!title || !author || !year) {
+    alert("Mohon isi semua data buku!");
+    return;
+  }
+
+  if (isEditing && editingBookId !== null) {
+    // Update buku
+    const book = findBook(editingBookId);
+    if (book) {
+      book.title = title;
+      book.author = author;
+      book.year = year;
+      book.isComplete = isComplete;
+
+      saveData(); // Simpan perubahan
+      renderBooks(); // Render ulang daftar buku
+      alert("Buku berhasil diperbarui!");
+    }
+
+    resetFormToAddBookMode(); // Kembali ke mode 'Tambah Buku'
+  } else {
+    // Tambah buku baru
+    addBook(title, author, year, isComplete);
+    alert("Buku berhasil ditambahkan!");
+  }
 
   bookForm.reset();
 });
@@ -129,25 +157,8 @@ function resetFormToAddBookMode() {
   form.reset();
 
   submitButton.innerText = "Tambah Buku ke rak"; // Ubah tombol ke mode 'Tambah'
-
-  // Set ulang event submit form untuk menambah buku
-  form.onsubmit = function (event) {
-    event.preventDefault();
-
-    const title = document.getElementById("bookFormTitle").value;
-    const author = document.getElementById("bookFormAuthor").value;
-    const year = document.getElementById("bookFormYear").value;
-    const isComplete = document.getElementById("bookFormIsComplete").checked;
-
-    if (title && author && year) {
-      // Fungsi untuk menambah buku
-      addBook(title, author, year, isComplete);
-      alert("Buku berhasil ditambahkan!");
-      form.reset();
-    } else {
-      alert("Mohon isi semua data buku!");
-    }
-  };
+  isEditing = false;
+  editingBookId = null;
 }
 
 // Fungsi untuk menangani edit buku
@@ -165,33 +176,8 @@ function editBook(bookId) {
   document.getElementById("bookFormIsComplete").checked = book.isComplete;
 
   submitButton.innerText = "Update Buku"; // Ubah tombol ke mode 'Update'
-
-  // Ubah event submit form ke mode 'Update'
-  form.onsubmit = function (event) {
-    event.preventDefault();
-
-    const updatedTitle = document.getElementById("bookFormTitle").value;
-    const updatedAuthor = document.getElementById("bookFormAuthor").value;
-    const updatedYear = document.getElementById("bookFormYear").value;
-    const updatedIsComplete =
-      document.getElementById("bookFormIsComplete").checked;
-
-    if (updatedTitle && updatedAuthor && updatedYear) {
-      // Update data buku
-      book.title = updatedTitle;
-      book.author = updatedAuthor;
-      book.year = updatedYear;
-      book.isComplete = updatedIsComplete;
-
-      saveData(); // Simpan perubahan
-      renderBooks(); // Render ulang daftar buku
-
-      alert("Buku berhasil diperbarui!");
-      resetFormToAddBookMode(); // Kembali ke mode 'Tambah Buku' setelah update
-    } else {
-      alert("Mohon isi semua data buku!");
-    }
-  };
+  isEditing = true;
+  editingBookId = bookId;
 }
 
 // Tandai buku sebagai selesai dibaca
@@ -269,7 +255,7 @@ function renderSearchResults(filteredBooks) {
   }
 }
 
-// Fungsi untuk load data ketika halaman di-refresh
+// Load data saat halaman di-refresh
 window.addEventListener("DOMContentLoaded", function () {
   if (isStorageExist()) {
     loadDataFromStorage();
