@@ -116,11 +116,19 @@ bookForm.addEventListener("submit", function (event) {
 
   const title = document.getElementById("bookFormTitle").value;
   const author = document.getElementById("bookFormAuthor").value;
-  const year = document.getElementById("bookFormYear").value;
+  let year = document.getElementById("bookFormYear").value;
   const isComplete = document.getElementById("bookFormIsComplete").checked;
 
+  // Validasi apakah semua field diisi
   if (!title || !author || !year) {
     alert("Mohon isi semua data buku!");
+    return;
+  }
+
+  // Validasi apakah tahun adalah angka
+  year = parseInt(year);
+  if (isNaN(year) || year < 0) {
+    alert("Mohon masukkan tahun yang valid!");
     return;
   }
 
