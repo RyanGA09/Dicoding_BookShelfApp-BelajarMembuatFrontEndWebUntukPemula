@@ -75,41 +75,81 @@ input[type="number"] {
 
 input[type="checkbox"] {
   margin-left: 10px;
-  display: none;
-}
-
-/* Gaya untuk span yang berfungsi sebagai checkbox */
-.custom-checkbox {
+  /* display: none; */
   width: 20px;
   height: 20px;
-  border: 2px solid #409efd;
-  display: inline-block;
-  border-radius: 4px; /* Sedikit melingkar */
-  margin-left: 10px;
-  position: relative;
   cursor: pointer;
 }
 
 /* Gaya ketika checkbox dicentang */
-input[type="checkbox"]:checked + .custom-checkbox {
-  background-color: #409efd; /* Warna latar belakang */
-  border: 2px solid #409efd; /* Warna border */
+input[type="checkbox"]:checked {
+  background-color: #409efd; /* Warna latar belakang saat dicentang */
+  border: 2px solid #409efd; /* Warna border saat dicentang */
+}
+
+/* Agar warna background muncul di semua browser */
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  width: 20px;
+  height: 20px;
   position: relative;
-  z-index: 1; /* Pastikan checkbox ada di atas elemen lain */
+}
+
+/* Gaya ketika checkbox dicentang */
+input[type="checkbox"]:checked {
+  background-color: #409efd;
+  border-color: #409efd;
 }
 
 /* Gaya untuk tanda centang */
-input[type="checkbox"]:checked + .custom-checkbox::after {
+input[type="checkbox"]:checked::after {
   content: "";
   position: absolute;
-  left: 6px; /* Atur posisi horizontal */
-  top: 2px; /* Atur posisi vertikal */
+  left: 5px;
+  top: 2px;
   width: 5px;
   height: 10px;
   border: solid white;
-  border-width: 0 2px 2px 0; /* Gaya tanda centang */
-  transform: rotate(45deg); /* Memutar tanda centang */
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
 }
+
+/* Gaya untuk span yang berfungsi sebagai checkbox */
+/* .custom-checkbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #409efd;
+  display: inline-block;
+  border-radius: 4px; Sedikit melingkar 
+  margin-left: 10px;
+  position: relative;
+  cursor: pointer;
+} */
+
+/* Gaya ketika checkbox dicentang */
+/* input[type="checkbox"]:checked + .custom-checkbox {
+  background-color: #409efd; Warna latar belakang
+  border: 2px solid #409efd; Warna border
+  position: relative;
+  z-index: 1; Pastikan checkbox ada di atas elemen lain 
+} */
+
+/* Gaya untuk tanda centang */
+/* input[type="checkbox"]:checked + .custom-checkbox::after {
+  content: "";
+  position: absolute;
+  left: 6px;  Atur posisi horizontal
+  top: 2px;  Atur posisi vertikal 
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0; Gaya tanda centang 
+  transform: rotate(45deg);  Memutar tanda centang 
+} */
 
 /* Gaya untuk daftar buku */
 .book-item {
