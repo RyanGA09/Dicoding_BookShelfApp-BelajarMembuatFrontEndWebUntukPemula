@@ -1,4 +1,4 @@
-# Bookshelf App (Dicoding Submission - Belajar Membuat Front-End Web untuk Pemula (Learn to Create FrontEndWeb for Beginners ))
+# Bookshelf App (Dicoding Submission - Belajar Membuat Front-End Web untuk Pemula (Learn to Create FrontEndWeb for Beginners))
 
 ## Author
 
