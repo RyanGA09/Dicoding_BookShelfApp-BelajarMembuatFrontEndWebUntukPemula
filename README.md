@@ -1,18 +1,18 @@
 # Bookshelf App (Dicoding Submission - Belajar Membuat Front-End Web untuk Pemula (Learn to Create FrontEndWeb for Beginners))
 
-## Author
+## Author:
 
 Ryan Gading Abdullah
 
-## Date Created
+## Date Created:
 
 September 2024
 
-## Description
+## Description:
 
 A simple bookshelf app that allows users to add, remove, search, and list books.
 
-## LICENSE
+## LICENSE:
 
 [MIT LICENSE](LICENSE)
 
