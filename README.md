@@ -14,6 +14,6 @@ This is A simple bookshelf app project. This project is my submission for the Di
 
 ## LICENSE:
 
-&copy; 2024 Ryan Gading Abdullah. All rights reserved.
+Copyright &copy; 2024 Ryan Gading Abdullah. All rights reserved.
 
-This project is licensed under the MIT License - see the [MIT LICENSE](LICENSE) for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) for details.
